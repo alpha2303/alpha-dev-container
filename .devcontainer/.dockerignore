@@ -1,0 +1,13 @@
+.git
+node_modules
+__pycache__
+*.pyc
+.venv
+target
+.cargo
+dist
+build
+*.egg-info
+.tox
+.pytest_cache
+.mypy_cache

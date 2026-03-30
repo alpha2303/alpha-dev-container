@@ -1,0 +1,38 @@
+{
+    "name": "Alpha Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+    "runArgs": [
+        "--gpus", "all"
+    ],
+    "containerEnv": {
+        "NVIDIA_VISIBLE_DEVICES": "all",
+        "NVIDIA_DRIVER_CAPABILITIES": "compute,utility"
+    },
+    "remoteUser": "devuser",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+    "hostRequirements": {
+        "gpu": "optional"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-vscode.cpptools",
+                "rust-lang.rust-analyzer",
+                "golang.go",
+                "vscjava.vscode-java-pack",
+                "dbaeumer.vscode-eslint",
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/bin/python3.13",
+                "editor.formatOnSave": true
+            }
+        }
+    },
+    "postCreateCommand": "echo '── Toolchain versions ──' && gcc --version | head -1 && python --version && uv --version && rustc --version && go version && node --version && npm --version && tsc --version && java --version 2>&1 | head -1 && echo '── GPU ──' && (nvidia-smi --query-gpu=name,driver_version --format=csv,noheader 2>/dev/null || echo 'nvidia-smi not available (GPU may not be attached)')"
+}

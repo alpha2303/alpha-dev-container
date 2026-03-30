@@ -1,0 +1,9 @@
+{
+    "name": "Alpha Dev Container",
+    "image": "alpha2303/alpha-dev-container:latest",
+    "runArgs": ["--gpus", "all"],
+    "remoteUser": "devuser",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+    "hostRequirements": { "gpu": "optional" }
+}
